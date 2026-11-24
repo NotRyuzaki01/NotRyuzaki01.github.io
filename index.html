@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artem Kotliar — Computer Science Student & Developer</title>
+<meta name="description" content="Artem Kotliar — Computer Science student at Sheridan College specializing in cloud computing. Software engineering, AWS infrastructure, full-stack and AI projects.">
+<style>
+  :root{
+    --bg:#0b0f17; --bg2:#0e1420; --card:#121a2a; --card2:#16203400;
+    --line:#1f2c44; --text:#e8eef7; --muted:#9db0c9; --faint:#6b7f9c;
+    --accent:#4da3ff; --accent2:#7c5cff; --good:#3ddc97;
+    --radius:16px; --max:1060px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;line-height:1.6;overflow-x:hidden}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  ::selection{background:var(--accent2);color:#fff}
+
+  /* ambient background */
+  .bgfx{position:fixed;inset:0;z-index:-2;background:
+    radial-gradient(900px 500px at 15% -10%, rgba(77,163,255,.16), transparent 60%),
+    radial-gradient(800px 500px at 90% 0%, rgba(124,92,255,.14), transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, rgba(61,220,151,.07), transparent 60%),
+    var(--bg)}
+  #dots{position:fixed;inset:0;z-index:-1;opacity:.5}
+
+  header.nav{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(10px);background:rgba(11,15,23,.72);border-bottom:1px solid var(--line)}
+  .nav-in{max-width:var(--max);margin:0 auto;padding:.7rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+  .logo{font-weight:700;letter-spacing:.4px;color:var(--text);font-size:1.02rem}
+  .logo span{color:var(--accent)}
+  nav.links{display:flex;gap:1.4rem;flex-wrap:wrap}
+  nav.links a{color:var(--muted);font-size:.93rem}
+  nav.links a:hover{color:var(--text);text-decoration:none}
+  @media(max-width:640px){nav.links{gap:.9rem} nav.links a{font-size:.85rem}}
+
+  main{max-width:var(--max);margin:0 auto;padding:0 1.25rem}
+  section{padding:4.2rem 0 1rem}
+  h2.sec{font-size:1.65rem;margin-bottom:.4rem;display:flex;align-items:center;gap:.6rem}
+  h2.sec::after{content:"";flex:1;height:1px;background:var(--line)}
+  .sec-sub{color:var(--muted);margin-bottom:1.8rem;font-size:.98rem}
+
+  /* hero */
+  .hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;padding-top:6rem}
+  .badge{display:inline-flex;align-items:center;gap:.5rem;border:1px solid var(--line);background:var(--bg2);color:var(--muted);border-radius:999px;padding:.32rem .85rem;font-size:.85rem;width:fit-content}
+  .badge .dot{width:8px;height:8px;border-radius:50%;background:var(--good);box-shadow:0 0 0 0 rgba(61,220,151,.6);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(61,220,151,.55)}70%{box-shadow:0 0 0 9px rgba(61,220,151,0)}100%{box-shadow:0 0 0 0 rgba(61,220,151,0)}}
+  .hero h1{font-size:clamp(2.6rem,7vw,4.4rem);line-height:1.08;margin:1.1rem 0 .4rem;font-weight:800;letter-spacing:-.5px}
+  .hero h1 .grad{background:linear-gradient(92deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .typewrap{font-size:clamp(1.15rem,3vw,1.5rem);color:var(--muted);min-height:2.2em;font-family:ui-monospace,"Cascadia Code",Consolas,monospace}
+  .typewrap .caret{display:inline-block;width:9px;background:var(--accent);color:transparent;animation:blink 1s steps(1) infinite;margin-left:2px}
+  @keyframes blink{50%{opacity:0}}
+  .hero p.lede{max-width:640px;color:var(--muted);margin:.8rem 0 1.6rem;font-size:1.05rem}
+  .cta{display:flex;gap:.8rem;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.72rem 1.35rem;border-radius:12px;font-weight:600;font-size:.97rem;border:1px solid var(--line);color:var(--text);background:var(--bg2);transition:transform .15s ease,border-color .15s ease,background .15s ease}
+  .btn:hover{text-decoration:none;transform:translateY(-2px);border-color:var(--accent)}
+  .btn.primary{background:linear-gradient(92deg,var(--accent),var(--accent2));border:none;color:#fff}
+  .btn.primary:hover{filter:brightness(1.1)}
+  .stats{display:flex;gap:2.2rem;flex-wrap:wrap;margin-top:2.6rem}
+  .stat .num{font-size:1.7rem;font-weight:800}
+  .stat .lbl{color:var(--faint);font-size:.85rem}
+
+  /* reveal on scroll */
+  .rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+  .rv.in{opacity:1;transform:none}
+
+  /* projects */
+  .filters{display:flex;gap:.55rem;flex-wrap:wrap;margin-bottom:1.4rem}
+  .chip{border:1px solid var(--line);background:var(--bg2);color:var(--muted);padding:.42rem 1rem;border-radius:999px;cursor:pointer;font-size:.9rem;transition:all .15s ease}
+  .chip:hover{color:var(--text);border-color:var(--accent)}
+  .chip.active{background:linear-gradient(92deg,var(--accent),var(--accent2));color:#fff;border:none}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.1rem}
+  .card{background:linear-gradient(180deg,var(--card),var(--bg2));border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem 1.3rem 1.15rem;display:flex;flex-direction:column;gap:.6rem;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;position:relative}
+  .card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 14px 34px rgba(0,0,0,.35)}
+  .card.hide{display:none}
+  .card h3{font-size:1.12rem;display:flex;justify-content:space-between;align-items:flex-start;gap:.6rem}
+  .card h3 a.ext{color:var(--faint);font-size:1rem;flex-shrink:0}
+  .card h3 a.ext:hover{color:var(--accent);text-decoration:none}
+  .card p{color:var(--muted);font-size:.94rem;flex:1}
+  .card .metric{display:inline-block;color:var(--good);font-weight:700;font-size:.9rem}
+  .tags{display:flex;gap:.4rem;flex-wrap:wrap}
+  .tag{font-size:.75rem;color:var(--accent);border:1px solid rgba(77,163,255,.35);padding:.14rem .55rem;border-radius:999px;font-family:ui-monospace,Consolas,monospace}
+
+  /* timeline */
+  .tl{position:relative;margin-left:.4rem;padding-left:1.6rem;border-left:2px solid var(--line)}
+  .tl-item{position:relative;padding-bottom:1.9rem}
+  .tl-item::before{content:"";position:absolute;left:calc(-1.6rem - 7px);top:6px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:3px solid var(--accent)}
+  .tl-item h3{font-size:1.08rem}
+  .tl-item .when{color:var(--accent);font-size:.87rem;font-family:ui-monospace,Consolas,monospace}
+  .tl-item .org{color:var(--muted);font-weight:600;font-size:.95rem}
+  .tl-item p,.tl-item li{color:var(--muted);font-size:.95rem}
+  .tl-item ul{margin:.35rem 0 0 1.1rem}
+
+  /* skills */
+  .skill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.1rem}
+  .skill-box{background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:1.15rem 1.2rem}
+  .skill-box h3{font-size:1rem;margin-bottom:.7rem;color:var(--text)}
+  .skill-box .tags .tag{color:var(--muted);border-color:var(--line)}
+  .skill-box .tag:hover{color:var(--accent);border-color:var(--accent);cursor:default}
+
+  .edu{background:linear-gradient(92deg,rgba(77,163,255,.09),rgba(124,92,255,.09));border:1px solid var(--line);border-radius:var(--radius);padding:1.4rem 1.5rem}
+  .edu h3{font-size:1.12rem}
+  .edu p{color:var(--muted)}
+
+  footer{border-top:1px solid var(--line);margin-top:4.5rem;padding:2.2rem 1.25rem 2.6rem;text-align:center;color:var(--faint);font-size:.9rem}
+  footer .socials{display:flex;gap:1.2rem;justify-content:center;margin-bottom:1rem;flex-wrap:wrap}
+  footer .socials a{color:var(--muted);font-weight:600}
+  footer .socials a:hover{color:var(--accent);text-decoration:none}
+  .toTop{position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--bg2);color:var(--text);cursor:pointer;font-size:1.1rem;opacity:0;pointer-events:none;transition:opacity .25s ease}
+  .toTop.show{opacity:1;pointer-events:auto}
+</style>
+</head>
+<body>
+<div class="bgfx"></div>
+<canvas id="dots"></canvas>
+
+<header class="nav">
+  <div class="nav-in">
+    <div class="logo">artem<span>.</span>kotliar</div>
+    <nav class="links">
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="badge"><span class="dot"></span> Spring 2027 Co-op &middot; Open to internships</div>
+    <h1>Artem <span class="grad">Kotliar</span></h1>
+    <div class="typewrap"><span id="typed"></span><span class="caret">|</span></div>
+    <p class="lede">Computer Science student specializing in cloud computing, with hands-on experience building full-stack applications, AWS infrastructure, and multiplayer game systems. Previous AI engineering intern — comfortable across backend development, APIs, databases, and collaborative projects.</p>
+    <div class="cta">
+      <a class="btn primary" href="#projects">View Projects</a>
+      <a class="btn" href="https://github.com/NotRyuzaki01/resume/blob/main/resume.pdf" target="_blank" rel="noopener">Download R&eacute;sum&eacute; (PDF)</a>
+      <a class="btn" href="https://github.com/NotRyuzaki01" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/artem-kotliar" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="num" data-count="1000000" data-suffix="+">0</div><div class="lbl">Visits on my published Roblox game</div></div>
+      <div class="stat"><div class="num" data-count="250" data-suffix="+">0</div><div class="lbl">Students reached as Peer Mentor</div></div>
+      <div class="stat"><div class="num" data-count="25" data-suffix="+">0</div><div class="lbl">Campus outreach events coordinated</div></div>
+      <div class="stat"><div class="num" data-count="17" data-suffix="">0</div><div class="lbl">Public GitHub repositories</div></div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <h2 class="sec rv">Projects</h2>
+    <p class="sec-sub rv">Filter by what you're interested in — everything here is built, shipped, or deployed.</p>
+    <div class="filters rv" id="filters">
+      <button class="chip active" data-filter="all">All</button>
+      <button class="chip" data-filter="ai">AI &amp; Full-Stack</button>
+      <button class="chip" data-filter="cloud">Cloud</button>
+      <button class="chip" data-filter="games">Games</button>
+      <button class="chip" data-filter="java">Java</button>
+    </div>
+    <div class="grid" id="projectGrid">
+      <article class="card rv" data-cat="ai">
+        <h3>WasteWise — AI Food Waste Platform</h3>
+        <p>Full-stack grocery tracking app with AI receipt scanning, inventory management, and expiration reminders. REST backend with a React frontend, Firebase authentication, Firestore, and analytics dashboards. Custom item-scanning model trained with PyTorch and TorchVision.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">PyTorch</span><span class="tag">Firebase</span></div>
+      </article>
+
+      <article class="card rv" data-cat="games">
+        <h3>Published Roblox Game <a class="ext" href="https://github.com/NotRyuzaki01" target="_blank" rel="noopener" title="More on GitHub">&#8599;</a></h3>
+        <p>Independently developed and published a multiplayer Roblox game — still active, with ongoing gameplay updates and persistent progression systems.</p>
+        <span class="metric">1M+ visits &middot; ~CAD $4,000 revenue</span>
+        <div class="tags"><span class="tag">Luau</span><span class="tag">Roblox Studio</span><span class="tag">Multiplayer</span></div>
+      </article>
+
+      <article class="card rv" data-cat="cloud">
+        <h3>Cloud Message Board — AWS Infrastructure</h3>
+        <p>PHP/Apache message board deployed on EC2 inside a custom VPC with public subnet routing and security groups. Private S3 message storage accessed from EC2 via IAM, with browser announcements through S3 CORS.</p>
+        <div class="tags"><span class="tag">AWS EC2</span><span class="tag">S3</span><span class="tag">IAM</span><span class="tag">VPC</span><span class="tag">PHP</span></div>
+      </article>
+
+      <article class="card rv" data-cat="ai">
+        <h3>LiveScan <a class="ext" href="https://github.com/NotRyuzaki01/LiveScan" target="_blank" rel="noopener" title="View on GitHub">&#8599;</a></h3>
+        <p>Python project from my GitHub — part of my ongoing work with scanning and computer-vision tooling.</p>
+        <div class="tags"><span class="tag">Python</span></div>
+      </article>
+
+      <article class="card rv" data-cat="games java">
+        <h3>VoiceChatMod <a class="ext" href="https://github.com/NotRyuzaki01/VoiceChatMod" target="_blank" rel="noopener" title="View on GitHub">&#8599;</a></h3>
+        <p>Java mod adding voice chat to a multiplayer game environment — real-time audio, networking, and in-game integration.</p>
+        <div class="tags"><span class="tag">Java</span><span class="tag">Networking</span></div>
+      </article>
+
+      <article class="card rv" data-cat="games java">
+        <h3>Minecraft Plugin Suite <a class="ext" href="https://github.com/NotRyuzaki01" target="_blank" rel="noopener" title="View on GitHub">&#8599;</a></h3>
+        <p>A family of server plugins built and published on GitHub — teleportation, set-home, starter kits, scoring, and RTP systems used by multiplayer servers.</p>
+        <div class="tags"><span class="tag">Java</span><span class="tag">Spigot API</span><span class="tag">Game Systems</span></div>
+      </article>
+
+      <article class="card rv" data-cat="cloud">
+        <h3>CI/CD &amp; Virtualization Labs <a class="ext" href="https://github.com/NotRyuzaki01" target="_blank" rel="noopener" title="View on GitHub">&#8599;</a></h3>
+        <p>GitHub Actions pipelines for Python and Flask apps, a calculator CI project, and Docker-based virtualization labs — automated testing and deployment from commit to green.</p>
+        <div class="tags"><span class="tag">GitHub Actions</span><span class="tag">Docker</span><span class="tag">Python</span><span class="tag">Flask</span></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <h2 class="sec rv">Experience</h2>
+    <p class="sec-sub rv">Where I've worked and what it taught me.</p>
+    <div class="tl">
+      <div class="tl-item rv">
+        <div class="when">Apr 2026 — Aug 2026</div>
+        <h3>AI Engineer Intern</h3>
+        <div class="org">Resso</div>
+        <ul>
+          <li>Participated in AI engineering discussions and development workflows in a professional team environment.</li>
+          <li>Collaborated with teammates on technical learning, problem-solving, and communication of engineering concepts.</li>
+        </ul>
+      </div>
+      <div class="tl-item rv">
+        <div class="when">Aug 2025 — Present</div>
+        <h3>Peer Mentor</h3>
+        <div class="org">Sheridan College</div>
+        <ul>
+          <li>Coordinated 25+ campus outreach events, contributing to a 45% increase in participation across 250+ students.</li>
+          <li>Supported new students with academic transitions and resolved questions through one-on-one guidance.</li>
+        </ul>
+      </div>
+      <div class="tl-item rv">
+        <div class="when">Ongoing</div>
+        <h3>Solo Game Developer</h3>
+        <div class="org">Roblox Platform</div>
+        <ul>
+          <li>Designed, built, and published a multiplayer game with over 1 million visits and ~CAD $4,000 in revenue to date.</li>
+          <li>Maintain gameplay updates and persistent progression systems for an active player base.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <h2 class="sec rv">Technical Skills</h2>
+    <p class="sec-sub rv">The toolbox, grouped the way I actually use it.</p>
+    <div class="skill-grid">
+      <div class="skill-box rv"><h3>Languages</h3><div class="tags"><span class="tag">Python</span><span class="tag">Java</span><span class="tag">C#</span><span class="tag">C++</span><span class="tag">SQL</span><span class="tag">TypeScript</span><span class="tag">Lua / Luau</span></div></div>
+      <div class="skill-box rv"><h3>Frameworks &amp; APIs</h3><div class="tags"><span class="tag">ASP.NET Core MVC</span><span class="tag">Entity Framework Core</span><span class="tag">React</span><span class="tag">FastAPI</span><span class="tag">REST APIs</span></div></div>
+      <div class="skill-box rv"><h3>Cloud &amp; Tools</h3><div class="tags"><span class="tag">AWS (EC2, S3, IAM, VPC)</span><span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Linux</span></div></div>
+      <div class="skill-box rv"><h3>Databases &amp; Concepts</h3><div class="tags"><span class="tag">SQLite</span><span class="tag">Firebase Firestore</span><span class="tag">OOP</span><span class="tag">MVC</span><span class="tag">Client-Server Architecture</span></div></div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <h2 class="sec rv">Education</h2>
+    <p class="sec-sub rv">&nbsp;</p>
+    <div class="edu rv">
+      <h3>Honours Bachelor of Computer Science — Cloud Computing</h3>
+      <p>Sheridan College, Oakville, Ontario &middot; Sep 2024 — Present &middot; Expected graduation April 2028 &middot; Enrolled in the co-op program</p>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="socials">
+    <a href="mailto:artem.kotliar.work@gmail.com">artem.kotliar.work@gmail.com</a>
+    <a href="https://github.com/NotRyuzaki01" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/artem-kotliar" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://github.com/NotRyuzaki01/resume/blob/main/resume.pdf" target="_blank" rel="noopener">R&eacute;sum&eacute; PDF</a>
+  </div>
+  <div>Oakville, Ontario, Canada &middot; (647) 581-9302</div>
+  <div style="margin-top:.4rem">&copy; 2026 Artem Kotliar. Built with plain HTML, CSS &amp; JavaScript — hosted on GitHub Pages.</div>
+</footer>
+
+<button class="toTop" id="toTop" aria-label="Back to top">&#8593;</button>
+
+<script>
+  /* typing effect */
+  (function(){
+    var roles = [
+      "Computer Science Student",
+      "Software Engineering & Cloud Computing",
+      "AI Engineering Intern",
+      "Full-Stack Developer",
+      "Game Developer — 1M+ visits"
+    ];
+    var el = document.getElementById('typed'), ri = 0, ci = 0, del = false;
+    function tick(){
+      var word = roles[ri];
+      el.textContent = word.slice(0, ci);
+      if(!del){ ci++; if(ci > word.length){ del = true; return setTimeout(tick, 1500); } }
+      else { ci--; if(ci === 0){ del = false; ri = (ri + 1) % roles.length; } }
+      setTimeout(tick, del ? 34 : 62);
+    }
+    tick();
+  })();
+
+  /* project filters */
+  (function(){
+    var chips = document.querySelectorAll('#filters .chip');
+    var cards = document.querySelectorAll('#projectGrid .card');
+    chips.forEach(function(chip){
+      chip.addEventListener('click', function(){
+        chips.forEach(function(c){ c.classList.remove('active'); });
+        chip.classList.add('active');
+        var f = chip.getAttribute('data-filter');
+        cards.forEach(function(card){
+          var cats = (card.getAttribute('data-cat') || '').split(' ');
+          card.classList.toggle('hide', f !== 'all' && cats.indexOf(f) === -1);
+        });
+      });
+    });
+  })();
+
+  /* reveal on scroll */
+  (function(){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+  })();
+
+  /* animated counters */
+  (function(){
+    function fmt(n){ return n >= 1000000 ? (n/1000000).toFixed(1).replace(/\.0$/,'') + 'M' : n.toLocaleString('en-CA'); }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(!e.isIntersecting) return;
+        var el = e.target, target = +el.getAttribute('data-count'), suf = el.getAttribute('data-suffix') || '';
+        var t0 = null;
+        function step(ts){
+          if(!t0) t0 = ts;
+          var p = Math.min((ts - t0) / 1400, 1);
+          el.textContent = fmt(Math.floor(target * (1 - Math.pow(1 - p, 3)))) + (p === 1 ? suf : '');
+          if(p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+        io.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.num[data-count]').forEach(function(el){ io.observe(el); });
+  })();
+
+  /* back to top */
+  (function(){
+    var btn = document.getElementById('toTop');
+    window.addEventListener('scroll', function(){ btn.classList.toggle('show', window.scrollY > 600); }, { passive: true });
+    btn.addEventListener('click', function(){ window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  })();
+
+  /* subtle dot canvas */
+  (function(){
+    var cv = document.getElementById('dots'), ctx = cv.getContext('2d'), W, H, pts = [];
+    function size(){
+      W = cv.width = window.innerWidth; H = cv.height = window.innerHeight;
+      pts = [];
+      var n = Math.min(70, Math.floor(W * H / 26000));
+      for(var i = 0; i < n; i++) pts.push({ x: Math.random()*W, y: Math.random()*H, vx: (Math.random()-.5)*.25, vy: (Math.random()-.5)*.25, r: Math.random()*1.6+.4 });
+    }
+    size(); window.addEventListener('resize', size);
+    (function draw(){
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = 'rgba(120,160,220,.35)';
+      pts.forEach(function(p){
+        p.x += p.vx; p.y += p.vy;
+        if(p.x < 0 || p.x > W) p.vx *= -1;
+        if(p.y < 0 || p.y > H) p.vy *= -1;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 7); ctx.fill();
+      });
+      requestAnimationFrame(draw);
+    })();
+  })();
+</script>
+</body>
+</html>
