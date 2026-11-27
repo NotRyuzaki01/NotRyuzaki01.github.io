@@ -1,0 +1,217 @@
+.contact-card-page {
+  min-height: 100vh;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse at 50% 0%, #133233 0%, transparent 52%),
+    linear-gradient(#28384b42 1px, transparent 1px),
+    linear-gradient(90deg, #28384b42 1px, transparent 1px);
+  background-size: auto, 32px 32px, 32px 32px;
+}
+
+.card-shell {
+  width: min(100% - 28px, 40rem);
+  margin-inline: auto;
+  padding-block: clamp(12px, min(5vh, 6vw), 58px) 32px;
+}
+
+.card-header,
+.identity-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+  font: 0.75rem/1.35 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.card-header { margin-block-end: 12px; }
+.card-header .brand { min-height: 44px; }
+
+.identity-card {
+  border: 1px solid #42646b;
+  border-radius: var(--radius);
+  background: var(--panel-deep);
+  box-shadow: 0 14px 64px #020709b3, inset 0 1px #70f5e530;
+}
+
+.identity-topline {
+  border-bottom: 1px solid var(--line);
+  padding: 13px clamp(16px, 4vw, 32px);
+  border-radius: var(--radius) var(--radius) 0 0;
+  background-color: var(--panel);
+}
+
+.identity-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--accent);
+}
+
+.identity-status .status-dot { flex-shrink: 0; }
+
+.identity-body { padding: clamp(16px, 4vw, 32px); }
+
+.identity-profile {
+  display: grid;
+  grid-template-columns: clamp(58px, 19vw, 108px) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(12px, 4vw, 24px);
+  margin-block-start: 2px;
+}
+
+.identity-avatar {
+  display: grid;
+  width: 100%;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid #43646e;
+  border-radius: 4px;
+  background-color: #12232d;
+  background-image:
+    linear-gradient(90deg, #70f5e51a 1px, transparent 1px),
+    linear-gradient(#70f5e51a 1px, transparent 1px);
+  background-size: 11px 11px;
+  color: var(--accent);
+  font: 600 clamp(1.375rem, 6vw, 2.4rem)/1 var(--font-display);
+  letter-spacing: -0.04em;
+  position: relative;
+}
+
+.identity-avatar::before,
+.identity-avatar::after {
+  content: '';
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  border-color: var(--accent);
+  border-style: solid;
+  pointer-events: none;
+}
+
+.identity-avatar::before { inset: 4px auto auto 4px; border-width: 1px 0 0 1px; }
+.identity-avatar::after { inset: auto 4px 4px auto; border-width: 0 1px 1px 0; }
+.identity-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+
+.identity-heading h1 {
+  margin: 0;
+  font: 600 clamp(1.65rem, 6.6vw, 3.2rem)/1.05 var(--font-display);
+  letter-spacing: -0.045em;
+}
+
+.identity-heading p {
+  margin: 7px 0 0;
+  color: var(--accent);
+  font-size: clamp(0.825rem, 2.3vw, 1rem);
+  line-height: 1.4;
+}
+
+.identity-intro {
+  margin: clamp(14px, 3vw, 24px) 0;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.card-actions,
+.card-utilities { display: grid; gap: 8px; }
+.card-actions { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+
+.card-actions .card-action {
+  justify-content: space-between;
+  gap: 5px;
+  min-height: 48px;
+  padding-inline: 12px;
+  font-size: 0.875rem;
+  text-align: start;
+}
+
+.card-action-primary,
+.card-action-email { grid-column: 1 / -1; }
+.card-actions .card-action-primary { min-height: 54px; font-size: 1rem; }
+
+.card-email-address {
+  flex: 1;
+  color: var(--muted);
+  font-size: 0.77rem;
+  font-weight: 400;
+  overflow-wrap: anywhere;
+  text-align: end;
+}
+
+.card-utilities {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  margin-block-start: 14px;
+  border-top: 1px solid var(--line);
+  padding-top: 6px;
+}
+
+.card-utilities a,
+.card-utilities button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 44px;
+  padding: 4px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.81rem;
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: none;
+}
+
+.card-utilities button { cursor: pointer; }
+.card-utilities :is(a, button):hover { background: var(--panel); color: var(--accent); }
+
+.contact-feedback {
+  margin-block: 8px 0;
+  color: var(--accent);
+  font-size: 0.875rem;
+}
+
+.contact-feedback:empty { margin-block: 0; }
+
+@media (min-width: 40rem) {
+  .card-actions { gap: 10px; }
+  .card-actions .card-action { padding-inline: 16px; font-size: 1rem; }
+  .card-email-address { font-size: 0.875rem; }
+  .card-utilities a, .card-utilities button { font-size: 0.875rem; }
+}
+
+.card-icon {
+  display: inline-block;
+  position: relative;
+  flex: 0 0 12px;
+  width: 12px;
+  height: 12px;
+}
+
+.card-icon-external::before,
+.card-icon-external::after {
+  position: absolute;
+  content: '';
+}
+
+.card-icon-external::before {
+  inset: 2px 2px auto auto;
+  width: 6px;
+  height: 6px;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+}
+
+.card-icon-external::after {
+  top: 5.5px;
+  left: 0;
+  width: 11px;
+  border-top: 1px solid currentColor;
+  transform: rotate(-45deg);
+}
